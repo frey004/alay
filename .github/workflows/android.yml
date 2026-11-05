@@ -1,0 +1,31 @@
+name: APK de Android
+
+on:
+  push:
+    paths: ["android/**", ".github/workflows/android.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Compilar APK
+        run: chmod +x gradlew && ./gradlew assembleRelease --no-daemon
+      - name: Renombrar
+        run: cp app/build/outputs/apk/release/app-release.apk alay.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alay-apk
+          path: android/alay.apk

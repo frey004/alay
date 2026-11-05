@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="22dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Alay"
+            android:textColor="@color/accent"
+            android:textSize="42sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:textColor="@color/muted"
+            android:textSize="15sp" />
+
+        <TextView style="@style/Section" android:text="Configuración (una sola vez)" />
+
+        <Button android:id="@+id/btnPerms" style="@style/Step" />
+        <Button android:id="@+id/btnOverlay" style="@style/Step" />
+        <Button android:id="@+id/btnModel" style="@style/Step" />
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:visibility="gone" />
+        <Button android:id="@+id/btnBattery" style="@style/Step" />
+        <Button android:id="@+id/btnAssistant" style="@style/Step"
+            android:text="Poner Alay como asistente del teléfono (opcional)" />
+
+        <TextView style="@style/Section" android:text="Usar" />
+
+        <Switch
+            android:id="@+id/swListen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Escuchar la palabra de activación siempre"
+            android:textColor="@color/fg"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnTest"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_button"
+            android:text="🎤  Hablar con Alay ahora"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+
+        <TextView style="@style/Section" android:text="Ajustes" />
+
+        <TextView style="@style/Label" android:text="Palabras de activación (separadas por comas)" />
+        <EditText android:id="@+id/etWake" style="@style/Input" android:inputType="text" />
+
+        <TextView style="@style/Label" android:text="Nombre del asistente" />
+        <EditText android:id="@+id/etName" style="@style/Input" android:inputType="textPersonName" />
+
+        <TextView style="@style/Label" android:text="Clave de API de Anthropic (opcional, para que responda a cualquier pregunta)" />
+        <EditText android:id="@+id/etKey" style="@style/Input" android:hint="sk-ant-…"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_button2"
+            android:text="Guardar ajustes"
+            android:textAllCaps="false"
+            android:textColor="@color/fg" />
+    </LinearLayout>
+</ScrollView>
