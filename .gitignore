@@ -5,3 +5,4 @@ android/local.properties
 android/.kotlin/
 *.iml
 .idea/
+/alay.apk
