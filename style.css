@@ -1,0 +1,64 @@
+:root {
+  --bg: #0b1020;
+  --fg: #eef0ff;
+  --muted: #9aa3c7;
+  --accent: #7c5cff;
+  --accent2: #7ef0ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+#home { min-height: 100%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 16px; padding: 24px; text-align: center; }
+h1 { font-size: 3rem; margin: 0; letter-spacing: .05em;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+#hint { color: var(--muted); max-width: 32ch; line-height: 1.5; }
+.status { color: var(--muted); font-size: .9rem; min-height: 1.2em; }
+
+button { font: inherit; cursor: pointer; border: 0; border-radius: 999px; }
+.primary { background: var(--accent); color: #fff; padding: 14px 28px; font-weight: 600; }
+.secondary { background: #1b2342; color: var(--fg); padding: 12px 24px; }
+.link { background: none; color: var(--muted); padding: 8px; }
+
+/* ---------- Overlay con avatar ---------- */
+#overlay { position: fixed; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px; padding: 24px;
+  background: radial-gradient(circle at 50% 40%, #1a1440 0%, rgba(5,8,20,.97) 70%);
+  opacity: 0; pointer-events: none; transform: scale(1.04);
+  transition: opacity .35s ease, transform .35s ease; z-index: 10; }
+#overlay.open { opacity: 1; pointer-events: auto; transform: none; }
+
+#avatarWrap { width: min(70vw, 320px); transform: translateY(30px) scale(.6);
+  transition: transform .5s cubic-bezier(.2,1.4,.4,1); }
+#overlay.open #avatarWrap { transform: none; }
+#avatar { width: 100%; height: auto; overflow: visible; }
+#head { transform-origin: 100px 180px; animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+
+#aura { transform-origin: 100px 110px; transition: opacity .3s; opacity: .4; }
+#overlay[data-state="listening"] #aura { animation: pulse 1.2s ease-in-out infinite; opacity: 1; }
+#overlay[data-state="thinking"] #head { animation: think 1s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { transform: scale(.9) } 50% { transform: scale(1.08) } }
+@keyframes think { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
+
+.bubble { max-width: min(90vw, 520px); margin: 0; text-align: center; line-height: 1.45;
+  min-height: 1.4em; }
+.bubble.user { color: var(--muted); font-style: italic; }
+.bubble.bot { font-size: 1.2rem; }
+.state-label { color: var(--accent2); font-size: .85rem; letter-spacing: .1em;
+  text-transform: uppercase; margin: 0; }
+.close { position: absolute; top: max(16px, env(safe-area-inset-top)); right: 16px;
+  background: #1b2342; color: var(--fg); width: 44px; height: 44px; font-size: 1.1rem; }
+
+/* ---------- Ajustes ---------- */
+dialog { background: #121834; color: var(--fg); border: 1px solid #2a3360;
+  border-radius: 16px; width: min(92vw, 440px); padding: 20px; }
+dialog::backdrop { background: rgba(0,0,0,.6); }
+dialog h2 { margin-top: 0; }
+dialog label { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; font-size: .9rem; }
+dialog input, dialog select { font: inherit; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid #2a3360; background: #0b1020; color: var(--fg); }
+dialog small { color: var(--muted); display: block; margin-bottom: 12px; }
+dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 0; }

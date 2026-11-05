@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <title>Alay</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Pantalla principal (en espera) -->
+  <main id="home">
+    <h1>Alay</h1>
+    <p id="hint">Pulsa <b>Activar micrófono</b> y luego di <b>“<span class="wake-label">Oye Alay</span>”</b></p>
+    <button id="startBtn" class="primary">🎤 Activar micrófono</button>
+    <button id="talkBtn" class="secondary" hidden>Hablar ahora</button>
+    <p id="status" class="status">Micrófono apagado</p>
+    <button id="settingsBtn" class="link">⚙️ Ajustes</button>
+  </main>
+
+  <!-- Avatar a pantalla completa (aparece al decir la palabra clave) -->
+  <section id="overlay" aria-hidden="true">
+    <div id="avatarWrap">
+      <svg id="avatar" viewBox="0 0 200 220" aria-label="Avatar">
+        <defs>
+          <radialGradient id="skin" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#9d85ff"/>
+            <stop offset="100%" stop-color="#5b3df5"/>
+          </radialGradient>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="60%" stop-color="#7c5cff" stop-opacity=".45"/>
+            <stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle id="aura" cx="100" cy="110" r="100" fill="url(#glow)"/>
+        <g id="head">
+          <!-- antenas / orejas -->
+          <circle cx="100" cy="22" r="7" fill="#c9bcff"/>
+          <rect x="97" y="26" width="6" height="20" rx="3" fill="#c9bcff"/>
+          <ellipse cx="100" cy="115" rx="72" ry="75" fill="url(#skin)"/>
+          <!-- cara -->
+          <ellipse cx="100" cy="120" rx="54" ry="48" fill="#141a33"/>
+          <g id="eyes">
+            <ellipse id="eyeL" cx="80" cy="108" rx="9" ry="11" fill="#7ef0ff"/>
+            <ellipse id="eyeR" cx="120" cy="108" rx="9" ry="11" fill="#7ef0ff"/>
+          </g>
+          <ellipse cx="66" cy="132" rx="8" ry="4" fill="#ff7eb6" opacity=".35"/>
+          <ellipse cx="134" cy="132" rx="8" ry="4" fill="#ff7eb6" opacity=".35"/>
+          <ellipse id="mouth" cx="100" cy="142" rx="14" ry="2" fill="#7ef0ff"/>
+        </g>
+      </svg>
+    </div>
+    <p id="youSaid" class="bubble user"></p>
+    <p id="reply" class="bubble bot"></p>
+    <p id="stateLabel" class="state-label">Escuchando…</p>
+    <button id="closeBtn" class="close" aria-label="Cerrar">✕</button>
+  </section>
+
+  <!-- Ajustes -->
+  <dialog id="settings">
+    <form method="dialog">
+      <h2>Ajustes</h2>
+      <label>Palabra de activación
+        <input id="wakeInput" placeholder="oye alay">
+      </label>
+      <label>Nombre del asistente
+        <input id="nameInput" placeholder="Alay">
+      </label>
+      <label>Voz
+        <select id="voiceSelect"></select>
+      </label>
+      <label>Clave de API de Anthropic (opcional, para respuestas inteligentes)
+        <input id="keyInput" type="password" placeholder="sk-ant-…" autocomplete="off">
+      </label>
+      <small>La clave se guarda solo en este dispositivo. Sin clave, Alay responde a comandos básicos (hora, fecha, chistes, buscar, abrir YouTube…).</small>
+      <menu>
+        <button value="cancel" class="link">Cancelar</button>
+        <button id="saveBtn" value="save" class="primary">Guardar</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
